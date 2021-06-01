@@ -6,7 +6,6 @@ const action = {
 
 let playerScore = 0;
 let computerScore = 0;
-let correctInput = false;
 
 function playRound(playerSelection, computerSelection) {
     let playerAction = prompt('Type "Rock", "Paper" or "Scissors"');
@@ -22,6 +21,7 @@ function playRound(playerSelection, computerSelection) {
 
     if (action[playerSelection]?.winsAgainst === computerSelection) {
         playerScore += 1;
+        console.log(`Player's score = ${playerScore}`);
         alert(
             `You win! ${playerSelection[0].toUpperCase()}${playerSelection.substring(
                 1
@@ -31,6 +31,7 @@ function playRound(playerSelection, computerSelection) {
         );
     } else if (action[playerSelection]?.losesTo === computerSelection) {
         computerScore += 1;
+        console.log(`Computer's score = ${computerScore}`);
         alert(
             `You lose! ${computerSelection[0].toUpperCase()}${computerSelection.substring(
                 1
@@ -39,7 +40,6 @@ function playRound(playerSelection, computerSelection) {
             )}`
         );
     } else if (playerSelection === computerSelection) {
-        correctInput = true;
         alert('Draw!');
     } else {
         alert('Wrong input, try again');
@@ -47,15 +47,14 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    for (let round = 0; round < 5; round++) playRound();
-    if (playerScore > computerScore) {
+    for (playerScore, computerScore; playerScore < 5 && computerScore < 5; )
+        playRound();
+    if (playerScore === 5) {
         alert('You win');
-    } else if (playerScore < computerScore) {
+    } else if (computerScore === 5) {
         alert('You lose');
-    } else if (playerScore === computerScore && correctInput === true) {
-        alert('Draw');
     } else {
-        alert('Please only type "Rock", "Paper" or "Scissors"');
+        alert('Something went terribly wrong');
     }
 }
 
