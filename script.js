@@ -13,25 +13,32 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerAction.toLowerCase();
     computerSelection = computerPlay;
 
-    return action[playerSelection]?.winsAgainst === computerSelection
-        ? alert(
-              `You win! ${playerSelection[0].toUpperCase()}${playerSelection.substring(
-                  1
-              )} beats ${computerSelection[0].toUpperCase()}${computerSelection.substring(
-                  1
-              )}`
-          )
-        : action[playerSelection]?.losesTo === computerSelection
-        ? alert(
-              `You lose! ${computerSelection[0].toUpperCase()}${computerSelection.substring(
-                  1
-              )} beats ${playerSelection[0].toUpperCase()}${playerSelection.substring(
-                  1
-              )}`
-          )
-        : playerSelection === computerSelection
-        ? alert('Draw!')
-        : alert('Wrong inputs, try again');
+    if (action[playerSelection]?.winsAgainst === computerSelection) {
+        var playerScore = 0;
+        playerScore += 1;
+        return alert(
+            `You win! ${playerSelection[0].toUpperCase()}${playerSelection.substring(
+                1
+            )} beats ${computerSelection[0].toUpperCase()}${computerSelection.substring(
+                1
+            )}`
+        );
+    } else if (action[playerSelection]?.losesTo === computerSelection) {
+        var computerScore = 0;
+        computerScore += 1;
+        return alert(
+            `You lose! ${computerSelection[0].toUpperCase()}${computerSelection.substring(
+                1
+            )} beats ${playerSelection[0].toUpperCase()}${playerSelection.substring(
+                1
+            )}`
+        );
+    } else if (playerSelection === computerSelection) {
+        alert('Draw!');
+    } else {
+        alert('Wrong input, try again');
+    }
 }
 
-playRound();
+function game() {}
+
