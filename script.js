@@ -6,7 +6,7 @@ const action = {
 
 let playerScore = 0;
 let computerScore = 0;
-let correctInput = 0;
+let correctInput = false;
 
 function playRound(playerSelection, computerSelection) {
     let playerAction = prompt('Type "Rock", "Paper" or "Scissors"');
@@ -39,7 +39,7 @@ function playRound(playerSelection, computerSelection) {
             )}`
         );
     } else if (playerSelection === computerSelection) {
-        correctInput = 1;
+        correctInput = true;
         alert('Draw!');
     } else {
         alert('Wrong input, try again');
@@ -52,7 +52,7 @@ function game() {
         alert('You win');
     } else if (playerScore < computerScore) {
         alert('You lose');
-    } else if (playerScore === computerScore && correctInput === 1) {
+    } else if (playerScore === computerScore && correctInput === true) {
         alert('Draw');
     } else {
         alert('Please only type "Rock", "Paper" or "Scissors"');
