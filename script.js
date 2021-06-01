@@ -1,22 +1,28 @@
-const computerAction = Math.floor(Math.random() * 3);
-const computerPlay =
-    computerAction === 0 ? 'rock' : computerAction === 1 ? 'paper' : 'scissors';
-
 const action = {
     rock: { losesTo: 'paper', winsAgainst: 'scissors' },
     paper: { losesTo: 'scissors', winsAgainst: 'rock' },
     scissors: { losesTo: 'rock', winsAgainst: 'paper' },
 };
 
+let playerScore = 0;
+let computerScore = 0;
+let correctInput = 0;
+
 function playRound(playerSelection, computerSelection) {
     let playerAction = prompt('Type "Rock", "Paper" or "Scissors"');
+    const computerAction = Math.floor(Math.random() * 3);
+    const computerPlay =
+        computerAction === 0
+            ? 'rock'
+            : computerAction === 1
+            ? 'paper'
+            : 'scissors';
     playerSelection = playerAction.toLowerCase();
     computerSelection = computerPlay;
 
     if (action[playerSelection]?.winsAgainst === computerSelection) {
-        var playerScore = 0;
         playerScore += 1;
-        return alert(
+        alert(
             `You win! ${playerSelection[0].toUpperCase()}${playerSelection.substring(
                 1
             )} beats ${computerSelection[0].toUpperCase()}${computerSelection.substring(
@@ -24,9 +30,8 @@ function playRound(playerSelection, computerSelection) {
             )}`
         );
     } else if (action[playerSelection]?.losesTo === computerSelection) {
-        var computerScore = 0;
         computerScore += 1;
-        return alert(
+        alert(
             `You lose! ${computerSelection[0].toUpperCase()}${computerSelection.substring(
                 1
             )} beats ${playerSelection[0].toUpperCase()}${playerSelection.substring(
@@ -34,11 +39,24 @@ function playRound(playerSelection, computerSelection) {
             )}`
         );
     } else if (playerSelection === computerSelection) {
+        correctInput = 1;
         alert('Draw!');
     } else {
         alert('Wrong input, try again');
     }
 }
 
-function game() {}
+function game() {
+    for (let round = 0; round < 5; round++) playRound();
+    if (playerScore > computerScore) {
+        alert('You win');
+    } else if (playerScore < computerScore) {
+        alert('You lose');
+    } else if (playerScore === computerScore && correctInput === 1) {
+        alert('Draw');
+    } else {
+        alert('Please only type "Rock", "Paper" or "Scissors"');
+    }
+}
 
+game();
