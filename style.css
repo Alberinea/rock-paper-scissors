@@ -1,0 +1,52 @@
+html, body {
+    background-color: black;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 75px;
+    text-align: center;
+}
+
+.result {
+    min-height: 700px;
+}
+
+.roundResult {
+    color: white;
+    font-size: 50px;
+    position: fixed;
+    text-align: center;
+    top: 30%;
+    left: 51%;
+    margin-top: -100px; 
+    margin-left: -250px;
+}
+
+.score {
+    color: white;
+    font-size: 50px;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    margin-top: -100px; 
+    margin-left: -250px; 
+}
+
+.button {
+    width: 200px;
+    height: 200px;
+    margin: 80px;   
+}
+
+.bottom {
+    display: flex;
+    width: 40%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

@@ -7,55 +7,52 @@ const action = {
 let playerScore = 0;
 let computerScore = 0;
 
-function playRound(playerSelection, computerSelection) {
-    let playerAction = prompt('Type "Rock", "Paper" or "Scissors"');
+const buttons = document.querySelectorAll('.button');
+const roundResult = document.querySelector('.roundResult');
+const resultContent = document.querySelector('.score');
+
+function playRound(playerSelection) {
     const computerAction = Math.floor(Math.random() * 3);
-    const computerPlay =
-        computerAction === 0
-            ? 'rock'
-            : computerAction === 1
-            ? 'paper'
-            : 'scissors';
-    playerSelection = playerAction.toLowerCase();
-    computerSelection = computerPlay;
+    const computerSelection =
+        computerAction === 0 ? 'rock' : computerAction === 1 ? 'paper' : 'scissors';
 
     if (action[playerSelection]?.winsAgainst === computerSelection) {
         playerScore += 1;
-        console.log(`Player's score = ${playerScore}`);
-        alert(
-            `You win! ${playerSelection[0].toUpperCase()}${playerSelection.substring(
-                1
-            )} beats ${computerSelection[0].toUpperCase()}${computerSelection.substring(
-                1
-            )}`
-        );
+        roundResult.innerText = `You win! \n\n ${playerSelection} beats ${computerSelection}`;
+        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
+        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     } else if (action[playerSelection]?.losesTo === computerSelection) {
         computerScore += 1;
-        console.log(`Computer's score = ${computerScore}`);
-        alert(
-            `You lose! ${computerSelection[0].toUpperCase()}${computerSelection.substring(
-                1
-            )} beats ${playerSelection[0].toUpperCase()}${playerSelection.substring(
-                1
-            )}`
-        );
-    } else if (playerSelection === computerSelection) {
-        alert('Draw!');
+        roundResult.innerText = `You lose! \n\n ${computerSelection} beats ${playerSelection}`;
+        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
+        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     } else {
-        alert('Wrong input, try again');
+        roundResult.innerText = `\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Draw!`;
+        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
+        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     }
 }
 
-function game() {
-    for (playerScore, computerScore; playerScore < 5 && computerScore < 5; )
-        playRound();
+function game(e) {
+    if (e.target.id === '1') {
+        playRound('rock');
+    } else if (e.target.id === '2') {
+        playRound('paper');
+    } else {
+        playRound('scissors');
+    }
+
     if (playerScore === 5) {
-        alert('You win');
+        buttons.forEach((button) => button.removeEventListener('click', game));
+        roundResult.style.cssText = 'font-size: 80px; color: blue';
+        roundResult.innerText = 'YOU WON';
     } else if (computerScore === 5) {
-        alert('You lose');
+        buttons.forEach((button) => button.removeEventListener('click', game));
+        roundResult.style.cssText = 'font-size: 80px; color: red';
+        roundResult.innerText = 'YOU LOST';
     } else {
-        alert('Something went terribly wrong');
+        return;
     }
 }
 
-game();
+buttons.forEach((button) => button.addEventListener('click', game));
