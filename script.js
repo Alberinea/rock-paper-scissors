@@ -9,8 +9,9 @@ let computerScore = 0;
 
 const buttons = document.querySelectorAll('.button');
 const startButton = document.querySelector('.startButton');
-const playAgainButton = document.querySelector('.playAgainButton')
+const playAgainButton = document.querySelector('.playAgainButton');
 const roundResult = document.querySelector('.roundResult');
+const roundExplanation = document.querySelector('.roundExplanation');
 const resultContent = document.querySelector('.score');
 
 function playRound(playerSelection) {
@@ -20,18 +21,24 @@ function playRound(playerSelection) {
 
     if (action[playerSelection]?.winsAgainst === computerSelection) {
         playerScore += 1;
-        roundResult.innerText = `You win! \n\n ${playerSelection} beats ${computerSelection}`;
-        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
-        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
+        roundResult.classList.remove('finalResult');
+        roundResult.innerText = `You win!`;
+        roundExplanation.innerText = `${playerSelection} beats ${computerSelection}`;
+        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
+        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     } else if (action[playerSelection]?.losesTo === computerSelection) {
         computerScore += 1;
-        roundResult.innerText = `You lose! \n\n ${computerSelection} beats ${playerSelection}`;
-        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
-        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
+        roundResult.classList.remove('finalResult');
+        roundResult.innerText = `You lose!`;
+        roundExplanation.innerText = `${computerSelection} beats ${playerSelection}`;
+        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
+        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     } else {
-        roundResult.innerText = `\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Draw!`;
-        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
-        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
+        roundResult.classList.remove('finalResult');
+        roundResult.innerText = `\u00a0\u00a0 Draw!`;
+        roundExplanation.innerText = '';
+        resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
+        \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     }
 }
 
@@ -46,12 +53,16 @@ function game(e) {
 
     if (playerScore === 5) {
         buttons.forEach((button) => button.removeEventListener('click', game));
+        roundExplanation.innerText = '';
+        roundResult.classList.add('finalResult');
         roundResult.style.cssText = 'font-size: 80px; color: blue';
         roundResult.innerText = 'YOU WON';
         resultContent.innerText = '';
         playAgainButton.classList.remove('hide');
     } else if (computerScore === 5) {
         buttons.forEach((button) => button.removeEventListener('click', game));
+        roundExplanation.innerText = '';
+        roundResult.classList.add('finalResult');
         roundResult.style.cssText = 'font-size: 80px; color: red';
         roundResult.innerText = 'YOU LOST';
         resultContent.innerText = '';
@@ -68,10 +79,11 @@ startButton.addEventListener('click', () => {
 });
 
 playAgainButton.addEventListener('click', () => {
-    roundResult.innerText = ''
-    roundResult.style.cssText = ''
+    roundResult.classList.remove('finalResult');
+    roundResult.innerText = '';
+    roundResult.style.cssText = '';
     playAgainButton.classList.add('hide');
     buttons.forEach((button) => button.addEventListener('click', game));
     playerScore = 0;
     computerScore = 0;
-})
+});

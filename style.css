@@ -21,13 +21,24 @@ h1 {
 
 .roundResult {
     color: white;
-    font-size: 50px;
+    font-size: 60px;
     position: fixed;
     text-align: center;
-    top: 33%;
-    left: 51%;
+    top: 30%;
+    left: 54%;
     margin-top: -100px; 
     margin-left: -250px;
+}
+
+.roundExplanation {
+    color: white;
+    font-size: 30px;
+    padding-bottom: 150px;
+}
+
+.finalResult {
+    left: 51%;
+    top: 35%;
 }
 
 .score {
@@ -43,16 +54,18 @@ h1 {
 .button {
     width: 200px;
     height: 200px;
-    margin: 80px;   
+    margin: 80px;
+    border-color: white;
+    border-style: solid;
 }
 
 .startButton {
-    height: 170px;
+    height: 250px;
     position: absolute;
 }
 
 .playAgainButton {
-    padding-top: 300px;
+    padding-top: 200px;
 }
 
 .bottom {
@@ -66,4 +79,9 @@ h1 {
 
 .hide {
     display: none;
+}
+
+.textCenter {
+    text-align: center;
+    display: flex;
 }
