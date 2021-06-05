@@ -22,6 +22,7 @@ function playRound(playerSelection) {
     if (action[playerSelection]?.winsAgainst === computerSelection) {
         playerScore += 1;
         roundResult.classList.remove('finalResult');
+        roundResult.style.cssText = 'color: blue;'
         roundResult.innerText = `You win!`;
         roundExplanation.innerText = `${playerSelection} beats ${computerSelection}`;
         resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
@@ -29,13 +30,15 @@ function playRound(playerSelection) {
     } else if (action[playerSelection]?.losesTo === computerSelection) {
         computerScore += 1;
         roundResult.classList.remove('finalResult');
+        roundResult.style.cssText = 'color: red;';
         roundResult.innerText = `You lose!`;
         roundExplanation.innerText = `${computerSelection} beats ${playerSelection}`;
         resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
         \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
     } else {
         roundResult.classList.remove('finalResult');
-        roundResult.innerText = `\u00a0\u00a0 Draw!`;
+        roundResult.style.cssText = ''
+        roundResult.innerText = `\u00a0 Draw!`;
         roundExplanation.innerText = '';
         resultContent.innerText = `Player \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Computer 
         \n \u00a0\u00a0\u00a0 ${playerScore} \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ${computerScore}`;
