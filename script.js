@@ -58,7 +58,7 @@ function game(e) {
         buttons.forEach((button) => button.removeEventListener('click', game));
         roundExplanation.innerText = '';
         roundResult.classList.add('finalResult');
-        roundResult.style.cssText = 'font-size: 80px; color: blue';
+        roundResult.style.cssText = 'color: blue';
         roundResult.innerText = 'YOU WON';
         resultContent.innerText = '';
         playAgainButton.classList.remove('hide');
@@ -66,7 +66,7 @@ function game(e) {
         buttons.forEach((button) => button.removeEventListener('click', game));
         roundExplanation.innerText = '';
         roundResult.classList.add('finalResult');
-        roundResult.style.cssText = 'font-size: 80px; color: red';
+        roundResult.style.cssText = 'color: red';
         roundResult.innerText = 'YOU LOST';
         resultContent.innerText = '';
         playAgainButton.classList.remove('hide');
