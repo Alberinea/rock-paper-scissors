@@ -8,6 +8,8 @@ let playerScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('.button');
+const startButton = document.querySelector('.startButton');
+const playAgainButton = document.querySelector('.playAgainButton')
 const roundResult = document.querySelector('.roundResult');
 const resultContent = document.querySelector('.score');
 
@@ -46,13 +48,30 @@ function game(e) {
         buttons.forEach((button) => button.removeEventListener('click', game));
         roundResult.style.cssText = 'font-size: 80px; color: blue';
         roundResult.innerText = 'YOU WON';
+        resultContent.innerText = '';
+        playAgainButton.classList.remove('hide');
     } else if (computerScore === 5) {
         buttons.forEach((button) => button.removeEventListener('click', game));
         roundResult.style.cssText = 'font-size: 80px; color: red';
         roundResult.innerText = 'YOU LOST';
+        resultContent.innerText = '';
+        playAgainButton.classList.remove('hide');
     } else {
         return;
     }
 }
 
-buttons.forEach((button) => button.addEventListener('click', game));
+startButton.addEventListener('click', () => {
+    startButton.classList.add('hide');
+    buttons.forEach((button) => button.addEventListener('click', game));
+    buttons.forEach((button) => button.classList.remove('hide'));
+});
+
+playAgainButton.addEventListener('click', () => {
+    roundResult.innerText = ''
+    roundResult.style.cssText = ''
+    playAgainButton.classList.add('hide');
+    buttons.forEach((button) => button.addEventListener('click', game));
+    playerScore = 0;
+    computerScore = 0;
+})
